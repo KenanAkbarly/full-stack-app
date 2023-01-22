@@ -41,6 +41,7 @@ const Artist = () => {
       axios.post(`http://localhost:8080/api/nft/${modal}`,values).then((res)=>{toast.success('Successfully added!')} )
     },
   });
+
   return (
     <>
     <div className={styled.artist_body}>

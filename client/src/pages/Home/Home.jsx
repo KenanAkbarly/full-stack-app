@@ -13,6 +13,11 @@ const Home = () => {
       console.log(res.data);
     })
   },[])
+  const [input,setInput] = useState('')
+  const handleChange = (event)=>{
+    setInput(event.target.value)
+    
+  }
   return (
     <>
     <div className={styled.top}>
@@ -21,7 +26,7 @@ const Home = () => {
         <h1>Browse Marketplace</h1>
         <p>Browse through more than 50k NFTs on the NFT Marketplace.</p>
         <div className={styled.search}>
-          <input type="text" placeholder='Search your favorite NFTs'/>
+          <input value={input} onChange={handleChange} type="text" placeholder='Search your favorite NFTs'/>
           <BsSearch/>
         </div>
       </section>
@@ -37,7 +42,15 @@ const Home = () => {
       <div className={styled.container}>
       <div className={styled.cards}>
         {
-          data && data.map((item)=>{
+          data && data.filter((item)=>{
+            if(input === ''){
+              return item
+            }else if(item.nftName.toLowerCase().includes(input.toLowerCase())){
+              return item
+            }else if(item.artist.name.toLowerCase().includes(input.toLowerCase())){
+              return item
+            }
+          }).map((item)=>{
             return(
               <div className={styled.card}>
           <div className={styled.card_top}>
